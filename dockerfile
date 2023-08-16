@@ -34,9 +34,8 @@ FROM nvidia/cuda:11.2.0-cudnn8-runtime-ubuntu18.04
  34 RUN python3 -m pip install --upgrade pip  && \
  35     pip install /workspace/paddlepaddle_gpu-2.4.0rc0.post112-cp37-cp37m-linux_x86_64.whl -i https://pypi.tuna.tsinghua.edu.cn/simple  && \
  36     rm /workspace/paddlepaddle_gpu-2.4.0rc0.post112-cp37-cp37m-linux_x86_64.whl
-"Dockerfile" 63L, 3433C
 
-ADD   ./PaddleSpeech.zip   /workspace/
+    ADD   ./PaddleSpeech.zip   /workspace/
  39 
  40 WORKDIR /workspace/PaddleSpeech/
  41 
