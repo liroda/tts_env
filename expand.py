@@ -10,7 +10,7 @@ def expand_char_to_phones(expand_length,word_bert_vec,max_char_length=256):
   pad_zeros = torch.zeros(reps.size(0),1).int()
   reps = torch.cat((pad_zeros,reps), axis=1)
 
-  reps_cumsum = torch.cumsum(reps,dim=1)[:,None:]
+  reps_cumsum = torch.cumsum(reps,dim=1)[:,None,:]
   reps_cumsum = reps_cumsum.float()
 
   range_ = torch.arange(max_char_length)[None,:,None]
