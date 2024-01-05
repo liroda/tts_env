@@ -14,7 +14,7 @@ def expand_char_to_phones(expand_length,word_bert_vec,max_char_length=256):
   reps_cumsum = reps_cumsum.float()
 
   range_ = torch.arange(max_char_length)[None,:,None]
-  mult = (( reps_cumsum[:,:,:,:-1] <= range_ ) &
+  mult = (( reps_cumsum[:,:,:-1] <= range_ ) &
           ( reps_cumsum[:,:,1:] > range_))
   mult = mult.float()
   phone_word_length = torch.matmul(mult,word_bert_vec)
