@@ -1,4 +1,7 @@
+
 Erlangshen-MegatronBert 是一个具有 39 亿参数的中文 BERT 模型，它是目前最大的中文 BERT 模型之一。这个模型的编码器结构为主，专注于解决各种自然语言理解任务。它同时，鉴于中文语法和大规模训练的难度，
 使用了四种预训练策略来改进 BERT，
 Erlangshen-MegatronBert 模型适用于各种自然语言理解任务，包括文本生成、文本分类、问答等，这个模型的权重和代码都是开源的，可以在 Hugging Face 和 CSDN 博客等平台上找到。
 
+参考博客：
+https://www.cnblogs.com/v3ucn/p/17949874
