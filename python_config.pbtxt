@@ -1,0 +1,52 @@
+name: "tts_front2"
+backend: "python"
+
+input [
+  {
+    name: "textstring"
+    data_type: TYPE_STRING
+    dims: [ 1 ]
+  }
+]
+output [
+   {
+        name: "x"
+        data_type: TYPE_INT64
+        dims: [-1,-1]
+    }
+]
+output [
+   {
+        name: "x_length"
+        data_type: TYPE_INT64
+        dims: [-1]
+    }
+]
+output [
+   {
+        name: "word_input_ids"
+        data_type: TYPE_INT32
+        dims: [1,-1]
+    }
+]
+output [
+   {
+        name: "expand_length"
+        data_type: TYPE_INT32
+        dims: [1,-1]
+    }
+]
+
+instance_group [
+     { 
+        count: 5
+        kind: KIND_CPU
+      }
+]
+
+parameters [
+  {
+    key: "FORCE_CPU_ONLY_INPUT_TENSORS"
+    value: { string_value: "yes" }
+  }
+]
