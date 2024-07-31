@@ -1,26 +1,42 @@
-name: "ensemble_model3"
+name: "ensemble_tts_model"
 platform: "ensemble"
 max_batch_size: 0
 input [
-  {
-    name: "text"
-    data_type: TYPE_INT32
-    dims: [ -1 ]
-  }
+   {
+        name: "textstring"
+        data_type: TYPE_STRING
+        dims: [-1]
+    }
+
 ]
 input [
-  {
-    name: "volume"
-    data_type: TYPE_FP32
-    dims: [ 1 ]
-  }
+   {
+        name: "noise_scale"
+        data_type: TYPE_FP32
+        dims: [1]
+    }
 ]
 input [
-  {
-    name: "speed"
-    data_type: TYPE_FP32
-    dims: [ 1 ]
-  }
+   {
+        name: "length_scale"
+        data_type: TYPE_FP32
+        dims: [1]
+    }
+]
+
+input [
+   {
+        name: "speed"
+        data_type: TYPE_FP32
+        dims: [1]
+    }
+]
+input [
+   {
+        name: "volume"
+        data_type: TYPE_FP32
+        dims: [1]
+    }
 ]
 output [
   {
@@ -32,48 +48,112 @@ output [
 ensemble_scheduling {
   step [
     {
-      model_name: "am"
-      model_version: 1
+      model_name: "tts_front_poly"
+      model_version:1
       input_map {
-        key: "text"
-        value: "text"
+        key: "textstring"
+        value:"textstring"
       }
       output_map {
-        key: "elementwise_add_59"
-        value: "mel"
+         key: "x"
+         value: "x"
+      }
+      output_map {
+          key: "x_length"
+          value: "x_length"
+      }
+      output_map {
+          key: "word_input_ids"
+          value: "word_input_ids"
+      }
+      output_map {
+          key: "expand_length"
+          value: "expand_length"
       }
     },
     {
-      model_name: "vocoder"
+      model_name: "prosody"
       model_version: 1
       input_map {
-        key: "logmel"
-        value: "mel"
+        key: "word_input_ids"
+        value: "word_input_ids"
+      }
+      input_map {
+        key: "expand_length"
+        value: "expand_length"
       }
       output_map {
-        key: "transpose_104.tmp_0"
-        value: "v_wav"
+        key: "bert_vec"
+        value: "bert_vec"
       }
     },
     {
-      model_name: "postpress"
+      model_name: "encoder"
       model_version: 1
       input_map {
-        key: "input0"
-        value: "v_wav"
+        key: "x"
+        value: "x"
       }
       input_map {
-        key: "volume"
-        value: "volume"
+        key: "x_length"
+        value: "x_length"
       }
       input_map {
-        key: "speed"
-        value: "speed"
+        key: "bert_vec"
+        value: "bert_vec"
+      }
+      input_map {
+        key: "noise_scale"
+        value: "noise_scale"
+      }
+      input_map {
+        key: "length_scale"
+        value: "length_scale"
       }
       output_map {
-        key: "output0"
-        value: "outwav"
+        key: "z_p"
+        value: "z_p"
       }
+      output_map {
+        key: "y_mask"
+        value: "y_mask"
+      }
+    },
+    {
+      model_name: "decoder"
+      model_version: 1
+      input_map {
+        key: "z_p"
+        value: "z_p"
+      }
+      input_map {
+        key: "y_mask"
+        value: "y_mask"
+      }
+      output_map {
+        key: "y"
+        value: "y"
+      }
+  },
+  {
+    model_name: "postpress"
+    model_version: 1
+    input_map {
+       key:"input0"
+       value:"y"
     }
+    input_map {
+       key:"speed"
+       value:"speed"
+    }
+    input_map {
+       key: "volume"
+       value: "volume"
+    }
+    output_map {
+       key:"output0"
+       value:"outwav"
+    }
+  }
   ]
 }
