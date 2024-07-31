@@ -1,0 +1,1164 @@
+name:"encoder"
+platform:"onnxruntime_onnx"
+default_model_filename:"bert-vits-encoder.onnx"
+
+instance_group [
+   {
+        count: 3
+        kind :KIND_GPU
+    }
+]
+
+input [
+    {
+        name:"x"
+        data_type: TYPE_INT64
+        dims: [-1,-1]
+     }
+]
+
+input [
+    {
+        name:"x_length"
+        data_type: TYPE_INT64
+        dims:[-1]
+    }
+]
+input [
+    {
+        name:"bert_vec"
+        data_type: TYPE_FP32
+        dims:[-1,-1,256]
+    }
+]
+input [
+    {
+        name:"noise_scale"
+        data_type: TYPE_FP32
+        dims:[1]
+    }
+]
+input [
+    {
+        name:"length_scale"
+        data_type: TYPE_FP32
+        dims:[1]
+    }
+]
+
+output [
+    {
+        name:"z_p"
+        data_type: TYPE_FP32
+        dims:[-1,192,-1]
+    }
+]
+output [
+    {
+        name:"y_mask"
+        data_type: TYPE_FP32
+        dims:[-1,-1,-1]
+    }
+]
+model_warmup [
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,66]
+            input_data_file: "x_66"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_66"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_66"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,71]
+            input_data_file: "x_71"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_71"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_71"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,73]
+            input_data_file: "x_73"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_73"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_73"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,77]
+            input_data_file: "x_77"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_77"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_77"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,81]
+            input_data_file: "x_81"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_81"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_81"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,86]
+            input_data_file: "x_86"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_86"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_86"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,95]
+            input_data_file: "x_95"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_95"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_95"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,96]
+            input_data_file: "x_96"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_96"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_96"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,98]
+            input_data_file: "x_98"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_98"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_98"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,100]
+            input_data_file: "x_100"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_100"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_100"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,102]
+            input_data_file: "x_102"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_102"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_102"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,105]
+            input_data_file: "x_105"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_105"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_105"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,106]
+            input_data_file: "x_106"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_106"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_106"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,110]
+            input_data_file: "x_110"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_110"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_110"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,111]
+            input_data_file: "x_111"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_111"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_111"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,112]
+            input_data_file: "x_112"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_112"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_112"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,114]
+            input_data_file: "x_114"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_114"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_114"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,127]
+            input_data_file: "x_127"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_127"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_127"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,135]
+            input_data_file: "x_135"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_135"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_135"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,147]
+            input_data_file: "x_147"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_147"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_147"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,150]
+            input_data_file: "x_150"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_150"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_150"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,153]
+            input_data_file: "x_153"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_153"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_153"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,155]
+            input_data_file: "x_155"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_155"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_155"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,156]
+            input_data_file: "x_156"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_156"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_156"
+              }
+           }
+},
+{
+    name: "encoder"
+    batch_size:1
+    inputs {
+        key:"x"
+        value:{
+            data_type:TYPE_INT64
+            dims:[1,157]
+            input_data_file: "x_157"
+         }
+    }
+    inputs {
+         key:"x_length"
+         value:{
+            data_type:TYPE_INT64
+            dims:[1]
+            input_data_file: "x_length_157"
+         }
+     }
+    inputs {
+          key:"noise_scale"
+          value:{
+              data_type:TYPE_FP32
+              dims:[1]
+              input_data_file: "noise_scale"
+           }
+     }
+    inputs {
+          key:"length_scale"
+          value:{
+               data_type:TYPE_FP32
+               dims:[1]
+               input_data_file: "length_scale"
+           }
+     }
+    inputs {
+           key:"bert_vec"
+           value:{
+                data_type:TYPE_FP32
+                dims:[1,1024,256]
+                input_data_file: "bert_vec_157"
+              }
+           }
+}
+]
